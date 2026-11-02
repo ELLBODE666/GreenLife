@@ -1,11 +1,26 @@
 #include "../headers/functions_load.hpp"
 
 using namespace std;
+namespace fs = filesystem;
 
 namespace funcFile
 {
+    void verificarPastaData()
+    {
+        fs::path caminhoData = fs::current_path().parent_path() / "data";
+
+        if(!fs::exists(caminhoData))
+        {
+            fs::create_directories(caminhoData);
+                
+        }
+    }
+
+
     void salvarQuadro(vector<Planta>& plantas, bool& regist, int& numeroDeQuadros)
     {
+        verificarPastaData();
+
         numeroDeQuadros = plantas.size();
         ofstream outfile("../data/plants_data.txt");
 
@@ -39,6 +54,8 @@ namespace funcFile
 
     void carregarQuadro(vector<Planta>& plantas, bool& regist, int& numeroDeQuadros)
     {
+        verificarPastaData();
+
         ifstream infile("../data/plants_data.txt");
 
         if(infile.is_open())
@@ -89,6 +106,8 @@ namespace funcFile
 
     void salvarListaClientes(vector<Cliente>& clientes, bool& registClient, int& numeroDeClientes)
     {
+        verificarPastaData();
+
         numeroDeClientes = clientes.size();
 
         ofstream outfile("../data/clients_data.txt");
@@ -123,6 +142,8 @@ namespace funcFile
 
     void salvarVendas(vector<Cliente>& clientes, bool& registClient, bool& registSell)
     {
+        verificarPastaData();
+
         if(registClient)
         {
             ofstream outfile("../data/vendas_data.txt");
@@ -164,6 +185,8 @@ namespace funcFile
 
     void carregarListaClientes(vector<Cliente>& clientes, bool& registClient, int& numeroDeClientes)
     {
+        verificarPastaData();
+
         ifstream infile("../data/clients_data.txt");
 
         if(infile.is_open())
@@ -203,7 +226,9 @@ namespace funcFile
 
 
     void carregarVendas(vector<Cliente>& clientes, bool& registClient, bool& registSell)
-    {       
+    {
+        verificarPastaData();
+               
         ifstream infile("../data/vendas_data.txt");
 
         if(registClient)

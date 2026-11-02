@@ -6,12 +6,15 @@
 #include <vector>
 #include <fstream>
 #include <locale>
+#include <filesystem>
 
 #include "../../classes_objects/headers/global_objects.hpp"
 #include "../../classes_objects/headers/classes.hpp"
 
 namespace funcFile
 {
+    void verificarPastaData();
+
     void salvarQuadro(vector<Planta>&, bool&, int&);
 
     void carregarQuadro(vector<Planta>&, bool&, int&);
